@@ -4,11 +4,11 @@ from matplotlib.animation import FuncAnimation
 from matplotlib.patches import Rectangle
 
 # Número de partículas
-n_particles = 200
+n_particles = 20
 
 # Posiciones iniciales y velocidades
 positions = np.random.uniform(0.0, 2.0, n_particles)
-velocities = np.random.normal(0.0, 0.05, n_particles)
+velocities = np.random.normal(0.0, 4.0, n_particles)
 y_positions = np.random.uniform(-0.8, 0.8, n_particles)
 
 memory_bits = []
@@ -21,7 +21,7 @@ ax.set_title("Demonio de Maxwell")
 ax.axvline(1, color='black', linestyle='--')  # Puerta en x=1
 
 # Puerta (trampilla)
-trapdoor = Rectangle((0.95, -0.9), 0.1, 0.1, color='red', alpha=0.2)
+trapdoor = Rectangle((1, -0.9), 0.1, 0.1, color='red', alpha=0.2)
 ax.add_patch(trapdoor)
 
 # Dibujar partículas
@@ -44,7 +44,7 @@ def update(frame):
             velocities[i] *= -1
 
         # Demonio abre la trampilla: si está a la izquierda y va a la derecha
-        if 0.98 < positions[i] < 1.0 and velocities[i] > 0:
+        if 0.98 < positions[i] < 1.0 and 2 < velocities[i] < 4:
             trapdoor_open = True
             memory_bits.append(True)  # Se almacena la decisión
             # Se deja pasar, no se rebota
